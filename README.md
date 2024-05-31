@@ -12,7 +12,7 @@ The project is created by **Chao Liu** and **Steven David Pillay**. In this proj
 
 ## Main Packages and Tools
 - ![Next.js](https://img.icons8.com/color/48/000000/nextjs.png) Next.js
-- ![Prisma](https://img.icons8.com/color/48/000000/prisma.png) Prisma
+- ![Prisma](https://img.icons8.com/?size=48&id=zJh5Gyrd6ZKu&format=png&color=000000) Prisma
 - ![ClerkAuth](https://img.icons8.com/color/48/000000/clerk.png) ClerkAuth
 - ![Shadcn-ui](https://img.icons8.com/color/48/000000/ui.png) Shadcn-ui
 - ![Zustand](https://img.icons8.com/color/48/000000/zustand.png) Zustand
