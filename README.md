@@ -13,7 +13,7 @@ The project is created by **Chao Liu** and **Steven David Pillay**. In this proj
 ## Main Packages and Tools
 - ![Next.js](https://img.icons8.com/color/48/000000/nextjs.png) Next.js
 - ![Prisma](https://img.icons8.com/?size=48&id=zJh5Gyrd6ZKu&format=png&color=000000) Prisma
-- ![ClerkAuth](https://img.icons8.com/color/48/000000/clerk.png) ClerkAuth
+- <img src="[https://github.com/code-Gambler/wonder-cart/assets/104114667/5d5bb565-eead-4f76-92c0-50c8481defd8](https://www.google.com/url?sa=i&url=https%3A%2F%2Fauthenticator.2stable.com%2Fservices%2Fclerk.com%2F&psig=AOvVaw102mz_Ndfvrfu7A-yRRUiz&ust=1717203472978000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJi9rsvXtoYDFQAAAAAdAAAAABAE)" alt="ClerkAuth" width="48" height="48"> ClerkAuth
 - ![Shadcn-ui](https://img.icons8.com/color/48/000000/ui.png) Shadcn-ui
 - ![Zustand](https://img.icons8.com/color/48/000000/zustand.png) Zustand
 - ![Axios](https://img.icons8.com/color/48/000000/axios.png) Axios
