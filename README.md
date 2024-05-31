@@ -6,7 +6,7 @@ The project is created by **Chao Liu** and **Steven David Pillay**. In this proj
 - ![TypeScript](https://img.icons8.com/color/48/000000/typescript.png) TypeScript
 - ![Tailwind CSS](https://img.icons8.com/color/48/000000/tailwindcss.png) Tailwind CSS
 - ![React](https://img.icons8.com/color/48/000000/react-native.png) React
-- ![image](https://github.com/code-Gambler/wonder-cart/assets/104114667/5d5bb565-eead-4f76-92c0-50c8481defd8)
+- ![PostgreSQL](https://github.com/code-Gambler/wonder-cart/assets/104114667/5d5bb565-eead-4f76-92c0-50c8481defd8)
  PostgreSQL
 - ![JavaScript](https://img.icons8.com/color/48/000000/javascript.png) JavaScript
 - ![HTML](https://img.icons8.com/color/48/000000/html-5.png) HTML
