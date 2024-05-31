@@ -26,6 +26,7 @@ The project is created by **Chao Liu** and **Steven David Pillay**. In this proj
   </tr>
   <tr>
     <td><img src="https://repository-images.githubusercontent.com/180328715/fca49300-e7f1-11ea-9f51-cfd949b31560" alt="Zustand" width="48" height="48"><br>Zustand</td>
+    <td><img src="https://images.ctfassets.net/lpjm8d10rkpy/3ZH89y9VHHd53v4OQ3BG0V/f9832f714b1075b424d90f5e31141c0b/cloudinary_cloud_glyph_regular.svg" alt="Cloudinary" width="48" height="48"><br>Cloudinary</td>
     <td><img src="https://play-lh.googleusercontent.com/_ATfgR5IQv2JcYauNzhTgntADBECazjfAkHMmq9xDj2Mcwts18TEJ9m3SYUNtdbsxog=w480-h960-rw" alt="Axios" width="48" height="48"><br>Axios</td>
     <td><img src="https://img.icons8.com/color/48/000000/eslint.png" alt="ESLint"><br>ESLint</td>
   </tr>
