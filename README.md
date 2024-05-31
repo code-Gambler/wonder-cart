@@ -1,12 +1,23 @@
-# Full-stack Web application Wonder Cart
+# Full-stack Web Application Wonder Cart
 
-The project is created by Chao Liu and Steven David Pillay. In this project, we will use multiple development tools and packages in building the Wonder cart e-commerce website application to allow users to set up their own store with standard CRUD functions. We will list the main language and tools by categories that we will use in this web application.
+The project is created by **Chao Liu** and **Steven David Pillay**. In this project, we will use multiple development tools and packages in building the Wonder Cart e-commerce website application to allow users to set up their own store with standard CRUD functions. We will list the main language and tools by categories that we will use in this web application.
 
-## Main languages
-Typescript, Tailwind CSS, React, PostgreSQL, Javascript, HTML
+## Main Languages
+- ![TypeScript](https://img.icons8.com/color/48/000000/typescript.png) TypeScript
+- ![Tailwind CSS](https://img.icons8.com/color/48/000000/tailwindcss.png) Tailwind CSS
+- ![React](https://img.icons8.com/color/48/000000/react-native.png) React
+- ![PostgreSQL](https://img.icons8.com/color/48/000000/postgresql.png) PostgreSQL
+- ![JavaScript](https://img.icons8.com/color/48/000000/javascript.png) JavaScript
+- ![HTML](https://img.icons8.com/color/48/000000/html-5.png) HTML
 
-## Main packages and tools
-Next.js, Prisma, ClerkAuth, Shadcn-ui, Zustand, Axios, eslint
+## Main Packages and Tools
+- ![Next.js](https://img.icons8.com/color/48/000000/nextjs.png) Next.js
+- ![Prisma](https://img.icons8.com/color/48/000000/prisma.png) Prisma
+- ![ClerkAuth](https://img.icons8.com/color/48/000000/clerk.png) ClerkAuth
+- ![Shadcn-ui](https://img.icons8.com/color/48/000000/ui.png) Shadcn-ui
+- ![Zustand](https://img.icons8.com/color/48/000000/zustand.png) Zustand
+- ![Axios](https://img.icons8.com/color/48/000000/axios.png) Axios
+- ![ESLint](https://img.icons8.com/color/48/000000/eslint.png) ESLint
 
 ## Project structure 
 ### The dashboard for users -Figma
