@@ -69,9 +69,10 @@ export const BillboardFrom: React.FC<BillboardFromProps> = ({
       } else {
         await axios.post(`/api/${params.storeId}/billboards`, data);
       }
-      router.refresh();
       router.push(`/${params.storeId}/billboards`);
+      router.refresh();
       toast.success(toastMessage);
+      // window.location.reload();
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -85,8 +86,8 @@ export const BillboardFrom: React.FC<BillboardFromProps> = ({
       await axios.delete(
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
+      router.push(`/${params.storeId}/billboards`);
       router.refresh();
-      router.push("/");
       toast.success("Billboard deleted");
     } catch (error) {
       toast.error(
@@ -165,7 +166,6 @@ export const BillboardFrom: React.FC<BillboardFromProps> = ({
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   );
 };
