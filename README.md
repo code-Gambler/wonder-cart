@@ -1,4 +1,12 @@
-# wonder-cart
+# Full-stack Web application Wonder Cart
+
+The project is created by Chao Liu and Steven David Pillay. In this project, we will use multiple development tools and packages in building the Wonder cart e-commerce website application to allow users to set up their own store with standard CRUD functions. We will list the main language and tools by categories that we will use in this web application.
+
+## Main languages
+Typescript, Tailwind CSS, React, PostgreSQL, Javascript, HTML
+
+## Main packages and tools
+Next.js, Prisma, ClerkAuth, Shadcn-ui, Zustand, Axios, eslint
 
 ## Project structure 
 ### The dashboard for users -Figma
