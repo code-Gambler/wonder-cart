@@ -22,7 +22,13 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -36,7 +42,8 @@ interface CategoryFormProps {
   billboards: Billboard[];
 }
 export const CategoryForm: React.FC<CategoryFormProps> = ({
-  initialData, billboards,
+  initialData,
+  billboards,
 }) => {
   const params = useParams();
   const router = useRouter();
@@ -46,9 +53,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
 
   const title = initialData ? "Edit category" : "Create category";
   const description = initialData ? "Edit a category" : "Add a new category";
-  const toastMessage = initialData
-    ? "category updated."
-    : "category created.";
+  const toastMessage = initialData ? "category updated." : "category created.";
   const action = initialData ? "Save changes" : "Create";
 
   const form = useForm<CategoryFormValues>({
@@ -73,7 +78,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       router.push(`/${params.storeId}/categories`);
       router.refresh();
       toast.success(toastMessage);
-      // window.location.reload();
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -143,27 +147,32 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                 </FormItem>
               )}
             />
-             <FormField
+            <FormField
               control={form.control}
               name="billboardId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Billboard</FormLabel>
-                  <Select disabled={loading} onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                    <SelectValue defaultValue={field.value}
-                    placeholder="Select a billboard"/>
-
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                  {billboards.map((billboard) => (
-                    <SelectItem key={billboard.id} value={billboard.id}>
-                      {billboard.label}
-                    </SelectItem>
-                  ))}
-                  </SelectContent>
+                  <Select
+                    disabled={loading}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select a billboard"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {billboards.map((billboard) => (
+                        <SelectItem key={billboard.id} value={billboard.id}>
+                          {billboard.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                   </Select>
                   <FormMessage />
                 </FormItem>
