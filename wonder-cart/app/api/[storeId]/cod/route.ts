@@ -2,7 +2,7 @@
 
 import { NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
-import emailjs from "@emailjs/browser";
+import nodemailer from "nodemailer";
 import axios from "axios";
 
 export async function POST(
@@ -47,30 +47,42 @@ export async function POST(
     },
   });
 
-  const serviceId = process.env.EMAILJS_SERVICE_ID;
-  const templateId = process.env.EMAILJS_TEMPLATE_ID;
-  const publicKey = process.env.EMAILJS_PUBLIC_KEY;
-
-  // if (!serviceId || !templateId || !publicKey) {
-  //   console.error("Missing EmailJS env variables");
-  //   return new NextResponse("Internal server error", { status: 500 });
-  // }
-try {
-  await axios.post("https://api.emailjs.com/api/v1.0/email/send", {
-    service_id: serviceId,
-    template_id: templateId,
-    user_id: publicKey,
-    template_params: {
-      from_name: name,
-      to_name: "Steven David Pillay",
-      reply_to: "stevendavidpillay@gmail.com",
-      to_email: "stevendavidpillay@gmail.com",
-      message: `${productIds.join(", ")} ${order.id}`,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
-} catch (err) {
-  console.error("EmailJS failed:", err);
-}
+
+  const mailOptions = {
+    from: `"WonderCart Orders" <${process.env.EMAIL_USERNAME}>`,
+    to: process.env.SELLER_EMAIL,
+    subject: `🛒 New COD Order from ${name}`,
+    text: `
+You have a new Cash on Delivery Order!
+
+📦 Order ID: ${order.id}
+🏪 Store ID: ${params.storeId}
+
+👤 Customer:
+- Name: ${name}
+- Phone: ${phone}
+- Address: ${address}
+
+🛍️ Products: ${productIds.join(", ")}
+
+📅 Date: ${new Date().toLocaleString()}
+  `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Email sent to seller");
+  } catch (error) {
+    console.error("❌ Email failed:", error);
+    // Optional: You can still return a 200 OK if you want the order to go through
+  }
 
   return NextResponse.json({ message: "Order placed successfully" });
 }
