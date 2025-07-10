@@ -51,34 +51,26 @@ export async function POST(
   const templateId = process.env.EMAILJS_TEMPLATE_ID;
   const publicKey = process.env.EMAILJS_PUBLIC_KEY;
 
-  if (!serviceId || !templateId || !publicKey) {
-    console.error("Missing EmailJS env variables");
-    return new NextResponse("Internal server error", { status: 500 });
-  }
-  try {
-
-    emailjs
-      .send(
-        serviceId,
-        templateId,
-        {
-          from_name: name,
-          to_name: "Steven David Pillay",
-          reply_to: "stevendavidpillay@gmail.com",
-          to_email: "stevendavidpillay@gmail.com",
-          message: `${productIds.join(", ")} ${order.id}`,
-        },
-        publicKey
-      )
-      .then(
-        () => {
-          alert("Order Placed");
-        }
-      );
-  }
-  catch (err) {
-    console.error("EmailJS failed:", err);
-  }
+  // if (!serviceId || !templateId || !publicKey) {
+  //   console.error("Missing EmailJS env variables");
+  //   return new NextResponse("Internal server error", { status: 500 });
+  // }
+try {
+  await axios.post("https://api.emailjs.com/api/v1.0/email/send", {
+    service_id: serviceId,
+    template_id: templateId,
+    user_id: publicKey,
+    template_params: {
+      from_name: name,
+      to_name: "Steven David Pillay",
+      reply_to: "stevendavidpillay@gmail.com",
+      to_email: "stevendavidpillay@gmail.com",
+      message: `${productIds.join(", ")} ${order.id}`,
+    },
+  });
+} catch (err) {
+  console.error("EmailJS failed:", err);
+}
 
   return NextResponse.json({ message: "Order placed successfully" });
 }
