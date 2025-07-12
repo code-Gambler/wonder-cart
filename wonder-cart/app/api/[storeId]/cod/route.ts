@@ -5,6 +5,16 @@ import prismadb from "@/lib/prismadb";
 import nodemailer from "nodemailer";
 import axios from "axios";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders });
+}
+
 export async function POST(
   req: Request,
   { params }: { params: { storeId: string } }
