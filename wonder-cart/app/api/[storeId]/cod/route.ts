@@ -79,10 +79,16 @@ You have a new Cash on Delivery Order!
   try {
     await transporter.sendMail(mailOptions);
     console.log("✅ Email sent to seller");
+
+    return NextResponse.json({ message: "Order placed successfully" });
   } catch (error) {
     console.error("❌ Email failed:", error);
-    // Optional: You can still return a 200 OK if you want the order to go through
-  }
 
+    // Still OK to send this even if email failed
+    return NextResponse.json(
+      { message: "Order placed, but email notification failed." },
+      { status: 200 }
+    );
+  }
   return NextResponse.json({ message: "Order placed successfully" });
 }
