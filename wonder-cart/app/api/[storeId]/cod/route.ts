@@ -38,15 +38,15 @@ export async function POST(
     where: { id: { in: productIds } },
   });
 
-  // // ✅ Verify Google reCAPTCHA
-  // const captchaSecret = process.env.RECAPTCHA_SECRET_KEY!;
-  // const captchaVerify = await axios.post(
-  //   `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecret}&response=${captcha}`
-  // );
+  // ✅ Verify Google reCAPTCHA
+  const captchaSecret = process.env.RECAPTCHA_SECRET_KEY!;
+  const captchaVerify = await axios.post(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecret}&response=${captcha}`
+  );
 
-  // if (!captchaVerify.data.success) {
-  //   return new NextResponse("CAPTCHA verification failed", { status: 403 });
-  // }
+  if (!captchaVerify.data.success) {
+    return new NextResponse("CAPTCHA verification failed", { status: 403, headers: corsHeaders });
+  }
 
   // ✅ Create the Order
   const order = await prismadb.order.create({
