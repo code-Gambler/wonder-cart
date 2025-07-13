@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Button from "@/components/ui/button";
@@ -13,6 +13,11 @@ const Summary = () => {
   const searchParams = useSearchParams();
   const items = useCart((state) => state.items);
   const removeAll = useCart((state) => state.removeAll);
+
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (searchParams.get("success")) {
@@ -29,15 +34,34 @@ const Summary = () => {
     return total + Number(item.price);
   }, 0);
 
-  const onCheckout = async () => {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/checkout`,
-      {
-        productIds: items.map((item) => item.id),
-      }
-    );
+  // Stripe Checkout - TEMPORARILY DISABLED
+  // const onCheckout = async () => {
+  //   const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
+  //     productIds: items.map((item) => item.id),
+  //   });
+  //   window.location = response.data.url;
+  // };
 
-    window.location = response.data.url;
+  const onCashOrder = async () => {
+    try {
+      setLoading(true);
+      console.log("details", name, address, phone, items.map((item) => item.id) );
+
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/cod`, {
+        name,
+        address,
+        phone,
+        productIds: items.map((item) => item.id),
+        captcha: "test-placeholder", // replace later with real token
+      });
+
+      toast.success("Order placed successfully!");
+      removeAll();
+    } catch (error: any) {
+      toast.error(error?.response?.data || "Failed to place order");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -49,12 +73,59 @@ const Summary = () => {
           <Currency value={totalPrice} />
         </div>
       </div>
-      <Button
+
+      {/* Cash On Delivery Form */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onCashOrder();
+        }}
+        className="space-y-4 mt-6"
+      >
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border border-gray-300 px-4 py-2 rounded"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="w-full border border-gray-300 px-4 py-2 rounded"
+          required
+        />
+        <input
+          type="tel"
+          placeholder="Phone Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full border border-gray-300 px-4 py-2 rounded"
+          required
+        />
+
+        {/* CAPTCHA Integration will go here later */}
+
+        <Button
+          type="submit"
+          disabled={items.length === 0 || loading}
+          className="w-full mt-4"
+        >
+          Place Cash on Delivery Order
+        </Button>
+      </form>
+
+      {/* Stripe Checkout Option - Commented for now */}
+      {/* <Button
         onClick={onCheckout}
         disabled={items.length === 0}
-        className="w-full mt-6">
-        Checkout
-      </Button>
+        className="w-full mt-6"
+      >
+        Checkout with Card
+      </Button> */}
     </div>
   );
 };

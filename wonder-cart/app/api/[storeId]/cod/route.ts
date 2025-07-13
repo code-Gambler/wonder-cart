@@ -30,6 +30,14 @@ export async function POST(
     return new NextResponse("Missing required fields", { status: 400 });
   }
 
+  if (!productIds || productIds.length === 0) {
+    return new NextResponse("Product ids are required", { status: 400 });
+  }
+
+  const products = await prismadb.product.findMany({
+    where: { id: { in: productIds } },
+  });
+
   // // ✅ Verify Google reCAPTCHA
   // const captchaSecret = process.env.RECAPTCHA_SECRET_KEY!;
   // const captchaVerify = await axios.post(
@@ -50,8 +58,12 @@ export async function POST(
       address: address,
       phone: phone,
       orderItems: {
-        create: productIds.map((id: string) => ({
-          product: { connect: { id } },
+        create: productIds.map((productId: string) => ({
+          product: {
+            connect: {
+              id: productId,
+            },
+          },
         })),
       },
     },
