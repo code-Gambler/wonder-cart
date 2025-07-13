@@ -7,8 +7,9 @@ import { DataTable } from "@/components/ui/data-table";
 
 interface OrderClientProps {
   data: OrderColumn[];
+  storeId: string;
 }
-export const OrderClient: React.FC<OrderClientProps> = ({ data }) => {
+export const OrderClient: React.FC<OrderClientProps> = ({ data, storeId }) => {
   return (
     <>
       <Heading
@@ -16,7 +17,7 @@ export const OrderClient: React.FC<OrderClientProps> = ({ data }) => {
       description="Manage orders for your store"
       />
       <Separator />
-      <DataTable searchKey="products" columns={columns} data={data} />
+      <DataTable searchKey="products" columns={columns(storeId)} data={data} />
     </>
   );
 };
