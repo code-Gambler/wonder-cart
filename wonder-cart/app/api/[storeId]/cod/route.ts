@@ -23,15 +23,15 @@ export async function POST(
   const { name, address, phone, productIds, captcha } = body;
 
   if (!params.storeId) {
-    return new NextResponse("Store ID is required", { status: 400 });
+    return new NextResponse("Store ID is required", { status: 400, headers: corsHeaders });
   }
 
   if (!name || !address || !phone || !productIds?.length || !captcha) {
-    return new NextResponse("Missing required fields", { status: 400 });
+    return new NextResponse("Missing required fields", { status: 400, headers: corsHeaders });
   }
 
   if (!productIds || productIds.length === 0) {
-    return new NextResponse("Product ids are required", { status: 400 });
+    return new NextResponse("Product ids are required", { status: 400, headers: corsHeaders });
   }
 
   const products = await prismadb.product.findMany({
@@ -101,12 +101,12 @@ You have a new Cash on Delivery Order!
   try {
     await transporter.sendMail(mailOptions);
     console.log("✅ Email sent to seller");
-    return NextResponse.json({ message: "Order placed successfully" });
+    return NextResponse.json({ message: "Order placed successfully" },  { status: 200, headers: corsHeaders });
   } catch (error) {
     console.error("❌ Email failed:", error);
     return NextResponse.json(
       { message: "Order placed, but email notification failed." },
-      { status: 200 }
+       { status: 200, headers: corsHeaders }
     );
   }
 }

@@ -46,6 +46,7 @@ const Summary = () => {
     try {
       setLoading(true);
       console.log("details", name, address, phone, items.map((item) => item.id) );
+      console.log("🛒 Incoming productIds:", items);
 
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/cod`, {
         name,
