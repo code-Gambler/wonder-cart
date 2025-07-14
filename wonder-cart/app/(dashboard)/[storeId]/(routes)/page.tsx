@@ -13,7 +13,8 @@ import { CreditCard, DollarSign, Package } from "lucide-react";
 interface DashboardPageProps {
   params: { storeId: string };
 }
-const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
+export default async function DashboardPage(props: DashboardPageProps) {
+  const { params } = await props;
   const totalRevenue = await getTotalRevenue(params.storeId);
   const salesCount = await getSalesCount(params.storeId);
   const stockCount = await getStockCount(params.storeId);
@@ -70,5 +71,3 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
     </div>
   );
 };
-
-export default DashboardPage;
