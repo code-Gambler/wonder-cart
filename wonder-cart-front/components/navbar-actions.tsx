@@ -27,7 +27,8 @@ export default function NavbarActions() {
     <div className="ml-auto flex items-center gap-x-4">
       <Button
         onClick={() => router.push("/cart")}
-        className="flex items-center rounded-full bg-black px-4 py-2">
+        className="flex items-center rounded-full bg-black px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={cart.items.length === 0}>
         <ShoppingBag className="w-4 h-4" />
         <span className="ml-2 text-sm font-medium text-white">
           {cart.items.length}

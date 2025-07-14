@@ -8,6 +8,8 @@ import Button from "@/components/ui/button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { toast } from "react-hot-toast";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRouter } from "next/navigation";
 
 const Summary = () => {
   const searchParams = useSearchParams();
@@ -18,6 +20,8 @@ const Summary = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (searchParams.get("success")) {
@@ -45,19 +49,22 @@ const Summary = () => {
   const onCashOrder = async () => {
     try {
       setLoading(true);
-      console.log("details", name, address, phone, items.map((item) => item.id) );
-      console.log("🛒 Incoming productIds:", items);
+      if (!captchaToken) {
+        toast.error("Please verify you're not a robot.");
+        return;
+      }
 
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/cod`, {
         name,
         address,
         phone,
         productIds: items.map((item) => item.id),
-        captcha: "test-placeholder", // replace later with real token
+        captcha: captchaToken,
       });
 
       toast.success("Order placed successfully!");
       removeAll();
+      router.push("/");
     } catch (error: any) {
       toast.error(error?.response?.data || "Failed to place order");
     } finally {
@@ -109,6 +116,12 @@ const Summary = () => {
         />
 
         {/* CAPTCHA Integration will go here later */}
+
+        <ReCAPTCHA
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+          onChange={(token: string | null) => setCaptchaToken(token)}
+          className="w-full"
+        />
 
         <Button
           type="submit"
