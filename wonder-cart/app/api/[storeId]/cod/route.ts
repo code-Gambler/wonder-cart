@@ -20,13 +20,13 @@ export async function POST(
   { params }: { params: { storeId: string } }
 ) {
   const body = await req.json();
-  const { name, address, phone, productIds, captcha } = body;
+  const { name, address, phone, productIds, region, captcha } = body;
 
   if (!params.storeId) {
     return new NextResponse("Store ID is required", { status: 400, headers: corsHeaders });
   }
 
-  if (!name || !address || !phone || !productIds?.length || !captcha) {
+  if (!name || !address || !phone || !productIds?.length || !captcha || !region) {
     return new NextResponse("Missing required fields", { status: 400, headers: corsHeaders });
   }
 
@@ -57,6 +57,7 @@ export async function POST(
       customerName: name,
       address: address,
       phone: phone,
+      region: region,
       orderItems: {
         create: productIds.map((productId: string) => ({
           product: {
@@ -91,6 +92,7 @@ You have a new Cash on Delivery Order!
 - Name: ${name}
 - Phone: ${phone}
 - Address: ${address}
+- Region: ${region}
 
 🛍️ Products: ${productIds.join(", ")}
 
