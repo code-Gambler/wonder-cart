@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Product" ALTER COLUMN "sizeId" DROP NOT NULL,
+ALTER COLUMN "colorId" DROP NOT NULL;
